@@ -91,7 +91,7 @@ git clone https://github.com/satriyaj/Kelompok-11_Komputasi-Paralel-dan-Terdistr
 ## 2. Masuk ke Folder Project
 
 ```bash
-cd MonteCarlo-Battle-RPG
+cd Kelompok-11_Komputasi-Paralel-dan-Terdistribusi
 ```
 
 ---
