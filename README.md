@@ -83,7 +83,7 @@ MonteCarlo-Battle-RPG/
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/MonteCarlo-Battle-RPG.git
+git clone https://github.com/satriyaj/Kelompok-11_Komputasi-Paralel-dan-Terdistribusi.git
 ```
 
 ---
