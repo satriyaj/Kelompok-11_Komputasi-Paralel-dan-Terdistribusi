@@ -69,7 +69,6 @@ def test_sequential_runs():
         PLAYER_A,
         PLAYER_B
     )
-
     assert result["win_a"]+result["win_b"]==100
 
 
@@ -83,7 +82,6 @@ def test_parallel_runs():
         PLAYER_A,
         PLAYER_B
     )
-
     assert result["win_a"]+result["win_b"]==100
 
 
