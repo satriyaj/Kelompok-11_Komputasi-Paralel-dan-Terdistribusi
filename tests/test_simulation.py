@@ -46,7 +46,6 @@ PLAYER_B = {
 def test_damage_positive():
 
     damage=calculate_damage(PLAYER_A)
-
     assert damage>0
 
 
@@ -58,7 +57,6 @@ def test_battle_result():
         PLAYER_A,
         PLAYER_B
     )
-
     assert winner in ["A","B"]
 
 
