@@ -1045,7 +1045,7 @@ if "benchmark" in st.session_state and len(st.session_state.benchmark) > 0:
 
     st.pyplot(fig2)
 
-# ======================================
+    # ======================================
     # AMDAL'S LAW ANALYSIS
     # ======================================
 
@@ -1297,6 +1297,71 @@ if len(st.session_state.history) > 0:
     with m5:
         show_metric("Efficiency", f"{latest['Efficiency (%)']}%")
 
+    # =========================
+    # WORKLOAD DISTRIBUTION
+    # =========================
+
+    if latest["Mode"] == "Parallel":
+
+        st.markdown(
+            '<div class="section-title">📦 Workload Distribution</div>',
+            unsafe_allow_html=True
+        )
+
+        base_count = (
+            latest["Simulasi"] //
+            latest["Proses"]
+        )
+
+        remainder = (
+            latest["Simulasi"] %
+            latest["Proses"]
+        )
+
+        workload_data = []
+
+        for i in range(latest["Proses"]):
+
+            count = base_count + (
+                1 if i < remainder else 0
+            )
+
+            workload_data.append({
+                "Process": f"P{i+1}",
+                "Simulation Count": count
+            })
+
+        workload_df = pd.DataFrame(
+            workload_data
+        )
+
+        st.dataframe(
+            workload_df,
+            use_container_width=True
+        )
+
+        fig_workload, ax_workload = plt.subplots(
+            figsize=(8,4)
+        )
+
+        ax_workload.bar(
+            workload_df["Process"],
+            workload_df["Simulation Count"]
+        )
+
+        ax_workload.set_title(
+            "Workload Distribution per Process"
+        )
+
+        ax_workload.set_xlabel(
+            "Process"
+        )
+
+        ax_workload.set_ylabel(
+            "Simulation Count"
+        )
+
+        st.pyplot(fig_workload)
 
     # =========================
     # VISUALISASI HASIL
