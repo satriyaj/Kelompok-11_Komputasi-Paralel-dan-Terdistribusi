@@ -918,6 +918,67 @@ if run_button:
 
         st.success("Simulasi selesai!")
 
+if benchmark_button:
+
+    benchmark_results = []
+
+    with st.spinner(
+        "Menjalankan benchmark..."
+    ):
+
+        sequential = run_sequential(
+            total_simulations,
+            PLAYER_A,
+            PLAYER_B
+        )
+
+        seq_time = sequential[
+            "execution_time"
+        ]
+
+        benchmark_results.append({
+            "Processes": 1,
+            "Execution Time (s)": round(seq_time,4),
+            "Speedup": 1.0,
+            "Efficiency (%)": 100.0
+        })
+
+        process_list = [2,4,8]
+
+        for proc in process_list:
+
+            if proc > mp.cpu_count():
+                continue
+
+            parallel = run_parallel(
+                total_simulations,
+                proc,
+                PLAYER_A,
+                PLAYER_B
+            )
+
+            par_time = parallel[
+                "execution_time"
+            ]
+
+            speedup = (
+                seq_time /
+                par_time
+            )
+
+            efficiency = (
+                speedup /
+                proc
+            ) * 100
+
+            benchmark_results.append({
+                "Processes": proc,
+                "Execution Time (s)": round(par_time,4),
+                "Speedup": round(speedup,4),
+                "Efficiency (%)": round(efficiency,2)
+            })
+            st.session_state.benchmark = benchmark_results
+
 st.markdown(
     """
     <style>
