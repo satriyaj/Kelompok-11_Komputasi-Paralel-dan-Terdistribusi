@@ -7,7 +7,18 @@ import multiprocessing as mp
 from pathlib import Path
 from simulation import run_sequential, run_parallel, run_sequential_with_progress
 
+def calculate_amdahl(speedup, processes):
+    """
+    Menghitung serial fraction (f)
+    berdasarkan Amdahl's Law
+    """
 
+    if processes <= 1 or speedup <= 1:
+        return 0
+
+    f = ((1 / speedup) - (1 / processes)) / (1 - (1 / processes))
+
+    return max(0, min(f, 1))
 
 # =========================
 # KONFIGURASI HALAMAN
