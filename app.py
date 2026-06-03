@@ -1045,6 +1045,139 @@ if "benchmark" in st.session_state and len(st.session_state.benchmark) > 0:
 
     st.pyplot(fig2)
 
+# ======================================
+    # AMDAL'S LAW ANALYSIS
+    # ======================================
+
+    st.markdown(
+        '<div class="section-title">📈 Amdahl Analysis</div>',
+        unsafe_allow_html=True
+    )
+
+    best_row = benchmark_df.loc[
+        benchmark_df["Speedup"].idxmax()
+    ]
+
+    best_speedup = float(best_row["Speedup"])
+    best_processes = int(best_row["Processes"])
+
+    if best_processes > 1 and best_speedup > 1:
+
+        serial_fraction = (
+            ((1 / best_speedup) - (1 / best_processes))
+            /
+            (1 - (1 / best_processes))
+        )
+
+        serial_fraction = max(
+            0,
+            min(serial_fraction, 1)
+        )
+
+    else:
+        serial_fraction = 0
+
+    if serial_fraction > 0:
+        theoretical_max_speedup = (
+            1 / serial_fraction
+        )
+    else:
+        theoretical_max_speedup = float("inf")
+
+    max_speedup_text = (
+        f"{theoretical_max_speedup:.2f}x"
+        if theoretical_max_speedup != float("inf")
+        else "∞"
+    )
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+        show_metric(
+            "Serial Fraction (f)",
+            f"{serial_fraction:.4f}"
+        )
+
+    with c2:
+        show_metric(
+            "Max Theoretical Speedup",
+            max_speedup_text
+        )
+
+    processes = benchmark_df["Processes"].tolist()
+
+    amdahl_speedup = []
+
+    for p in processes:
+
+        predicted = 1 / (
+            serial_fraction +
+            ((1 - serial_fraction) / p)
+        )
+
+        amdahl_speedup.append(predicted)
+
+    fig3, ax3 = plt.subplots(figsize=(8,4))
+
+    ax3.plot(
+        benchmark_df["Processes"],
+        benchmark_df["Speedup"],
+        marker="o",
+        linewidth=2,
+        label="Empirical"
+    )
+
+    ax3.plot(
+        processes,
+        amdahl_speedup,
+        marker="s",
+        linestyle="--",
+        linewidth=2,
+        label="Amdahl Prediction"
+    )
+
+    ax3.plot(
+        processes,
+        processes,
+        linestyle=":",
+        linewidth=2,
+        label="Ideal"
+    )
+
+    ax3.set_xlabel("Jumlah Process")
+    ax3.set_ylabel("Speedup")
+    ax3.set_title("Empirical vs Amdahl vs Ideal")
+    ax3.legend()
+    ax3.grid(True)
+
+    st.pyplot(fig3)
+
+    if serial_fraction < 0.10:
+        bottleneck = (
+            "Serial fraction sangat kecil. Program memiliki potensi paralelisasi yang tinggi."
+        )
+    elif serial_fraction < 0.30:
+        bottleneck = (
+            "Masih terdapat bagian serial namun paralelisasi masih cukup efektif."
+        )
+    else:
+        bottleneck = (
+            "Bagian serial cukup besar sehingga membatasi speedup maksimum."
+        )
+
+    st.info(
+        f"""
+🏆 Speedup terbaik: {best_speedup:.2f}x menggunakan {best_processes} proses
+
+📌 Serial Fraction (f): {serial_fraction:.4f}
+
+🚀 Maximum Theoretical Speedup: {max_speedup_text}
+
+🔍 Analisis:
+{bottleneck}
+"""
+    )
+
 st.markdown(
     """
     <style>
