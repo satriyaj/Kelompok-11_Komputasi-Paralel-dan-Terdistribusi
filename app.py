@@ -605,7 +605,85 @@ with col_vs:
 
 with col_b:
     show_character_card(PLAYER_B)
+    
+# =========================
+# CHARACTER CONFIGURATION
+# =========================
 
+st.markdown(
+    '<div class="section-title">⚔️ Character Configuration</div>',
+    unsafe_allow_html=True
+)
+
+char_col1, char_col2 = st.columns(2)
+
+with char_col1:
+
+    st.subheader("🔫 Reaper")
+
+    PLAYER_A["hp"] = st.slider(
+        "HP Reaper",
+        50,
+        300,
+        PLAYER_A["hp"]
+    )
+
+    PLAYER_A["min_attack"] = st.slider(
+        "Min Attack Reaper",
+        1,
+        50,
+        PLAYER_A["min_attack"]
+    )
+
+    PLAYER_A["max_attack"] = st.slider(
+        "Max Attack Reaper",
+        1,
+        60,
+        PLAYER_A["max_attack"]
+    )
+
+    PLAYER_A["crit_rate"] = (
+        st.slider(
+            "Crit Rate Reaper (%)",
+            0,
+            100,
+            int(PLAYER_A["crit_rate"] * 100)
+        ) / 100
+    )
+
+with char_col2:
+
+    st.subheader("🧙 Cyber Mage")
+
+    PLAYER_B["hp"] = st.slider(
+        "HP Cyber Mage",
+        50,
+        300,
+        PLAYER_B["hp"]
+    )
+
+    PLAYER_B["min_attack"] = st.slider(
+        "Min Attack Cyber Mage",
+        1,
+        50,
+        PLAYER_B["min_attack"]
+    )
+
+    PLAYER_B["max_attack"] = st.slider(
+        "Max Attack Cyber Mage",
+        1,
+        60,
+        PLAYER_B["max_attack"]
+    )
+
+    PLAYER_B["crit_rate"] = (
+        st.slider(
+            "Crit Rate Cyber Mage (%)",
+            0,
+            100,
+            int(PLAYER_B["crit_rate"] * 100)
+        ) / 100
+    )
 
 # =========================
 # SETTING SIMULASI
