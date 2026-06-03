@@ -819,6 +819,9 @@ body {
 
 components.html(settings_html, height=260)
 
+st.info(
+    f"🖥️ Logical CPU Cores Terdeteksi: {mp.cpu_count()}"
+)
 
 set_col1, set_col2, set_col3 = st.columns(3)
 
