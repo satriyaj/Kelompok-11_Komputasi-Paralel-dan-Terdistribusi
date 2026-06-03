@@ -869,6 +869,10 @@ if "history" not in st.session_state:
 # JALANKAN SIMULASI
 # =========================
 if run_button:
+
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    
     with st.spinner("Simulasi sedang berjalan..."):
         sequential_result = run_sequential(total_simulations, PLAYER_A, PLAYER_B)
 
