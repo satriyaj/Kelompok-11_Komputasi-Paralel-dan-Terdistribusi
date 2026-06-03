@@ -825,7 +825,7 @@ set_col1, set_col2, set_col3 = st.columns(3)
 with set_col1:
     total_simulations = st.selectbox(
         "🎯 Jumlah Simulasi",
-        [10_000, 50_000, 100_000],
+        [10_000, 50_000, 100_000, 500_000, 1_000_000, 5_000_000],
         index=2
     )
 
