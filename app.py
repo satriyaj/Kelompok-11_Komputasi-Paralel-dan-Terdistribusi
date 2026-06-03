@@ -846,7 +846,9 @@ with set_col3:
     )
 
 run_button = st.button("🚀 RUN SIMULATION")
-
+benchmark_button = st.button(
+    "📊 BENCHMARK PARALLEL SCALING"
+)
 st.markdown(
     """
     <div class="note-box">
