@@ -3,9 +3,10 @@ import streamlit.components.v1 as components
 import pandas as pd
 import matplotlib.pyplot as plt
 import base64
+import multiprocessing as mp
 from pathlib import Path
+from simulation import run_sequential, run_parallel, run_sequential_with_progress
 
-from simulation import run_sequential, run_parallel
 
 
 # =========================
