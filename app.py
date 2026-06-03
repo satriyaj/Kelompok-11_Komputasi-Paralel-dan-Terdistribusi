@@ -979,6 +979,72 @@ if benchmark_button:
             })
             st.session_state.benchmark = benchmark_results
 
+if "benchmark" in st.session_state and len(st.session_state.benchmark) > 0:
+
+    st.markdown(
+        '<div class="section-title">📊 Benchmark Scaling</div>',
+        unsafe_allow_html=True
+    )
+
+    benchmark_df = pd.DataFrame(
+        st.session_state.benchmark
+    )
+
+    st.dataframe(
+        benchmark_df,
+        use_container_width=True
+    )
+
+    # ======================================
+    # SPEEDUP GRAPH
+    # ======================================
+
+    fig, ax = plt.subplots(figsize=(8,4))
+
+    ax.plot(
+        benchmark_df["Processes"],
+        benchmark_df["Speedup"],
+        marker="o",
+        linewidth=2,
+        label="Empirical"
+    )
+
+    ax.plot(
+        benchmark_df["Processes"],
+        benchmark_df["Processes"],
+        linestyle="--",
+        linewidth=2,
+        label="Ideal"
+    )
+
+    ax.set_xlabel("Jumlah Process")
+    ax.set_ylabel("Speedup")
+    ax.set_title("Parallel Speedup")
+    ax.legend()
+    ax.grid(True)
+
+    st.pyplot(fig)
+
+    # ======================================
+    # EFFICIENCY GRAPH
+    # ======================================
+
+    fig2, ax2 = plt.subplots(figsize=(8,4))
+
+    ax2.plot(
+        benchmark_df["Processes"],
+        benchmark_df["Efficiency (%)"],
+        marker="o",
+        linewidth=2
+    )
+
+    ax2.set_xlabel("Jumlah Process")
+    ax2.set_ylabel("Efficiency (%)")
+    ax2.set_title("Parallel Efficiency")
+    ax2.grid(True)
+
+    st.pyplot(fig2)
+
 st.markdown(
     """
     <style>
