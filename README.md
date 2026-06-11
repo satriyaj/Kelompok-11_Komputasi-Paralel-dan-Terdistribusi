@@ -1,3 +1,4 @@
+<img width="1394" height="726" alt="Screenshot 2026-06-03 135316" src="https://github.com/user-attachments/assets/8f29787d-4fef-4664-a4c9-4388c6d0d114" />
 # Monte Carlo Battle RPG Simulator
 
 Simulasi Battle RPG sederhana berbasis Monte Carlo Simulation untuk menganalisis peluang kemenangan karakter dan membandingkan performa Sequential vs Parallel Computing menggunakan Python Multiprocessing.
