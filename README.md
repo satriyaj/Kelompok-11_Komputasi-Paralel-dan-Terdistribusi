@@ -119,6 +119,8 @@ Pengujian dilakukan menggunakan:
 - 10.000 simulasi
 - 50.000 simulasi
 - 100.000 simulasi
+- 500.000 simulasi
+- 1.000.000 simulasi
 
 Dengan jumlah proses:
 - 1 proses
@@ -166,3 +168,7 @@ Sistem menghasilkan:
 # Lisensi
 
 Project ini dibuat untuk keperluan tugas UAS Mata Kuliah Parallel & Distributed Computing.
+
+# Video Demo
+
+https://drive.google.com/file/d/12Zn-8-6wC4_yimGfDYY6mTnuaLw2y7VR/view?usp=drive_link
