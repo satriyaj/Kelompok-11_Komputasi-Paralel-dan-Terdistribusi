@@ -120,6 +120,7 @@ Pengujian dilakukan menggunakan:
 - 100.000 simulasi
 - 500.000 simulasi
 - 1.000.000 simulasi
+- 5.000.000 simulasi
 
 Dengan jumlah proses:
 - 1 proses
